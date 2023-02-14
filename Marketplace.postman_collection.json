@@ -1,0 +1,687 @@
+{
+	"info": {
+		"_postman_id": "eeb206be-d673-4327-b4e9-a3a15aa0309a",
+		"name": "Marketplace",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10261392"
+	},
+	"item": [
+		{
+			"name": "Create Activation Order",
+			"item": [
+				{
+					"name": "productOrder",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{dpom}}/api/productOrderingManagement/v4/productOrder?depth=3&sort=-createdDate&category=marketplace&limit=1",
+							"host": [
+								"{{dpom}}"
+							],
+							"path": [
+								"api",
+								"productOrderingManagement",
+								"v4",
+								"productOrder"
+							],
+							"query": [
+								{
+									"key": "externalId",
+									"value": "220727000001",
+									"disabled": true
+								},
+								{
+									"key": "id",
+									"value": "ecf0d617-fd20-4302-80a1-b1c9544bf3ee",
+									"disabled": true
+								},
+								{
+									"key": "id",
+									"value": "aba9faf5-9276-42c6-8936-4ef89835fcc8",
+									"disabled": true
+								},
+								{
+									"key": "id",
+									"value": "95f335f9-13c6-11ed-b4af-a655ea27c35b",
+									"disabled": true
+								},
+								{
+									"key": "id",
+									"value": "8106e3c4-85e3-43d5-8a5e-eee6a3cd3de6",
+									"disabled": true
+								},
+								{
+									"key": "depth",
+									"value": "3"
+								},
+								{
+									"key": "sort",
+									"value": "-createdDate"
+								},
+								{
+									"key": "id",
+									"value": "818b6774-81bb-481e-8b05-1fdc32842a15",
+									"disabled": true
+								},
+								{
+									"key": "category",
+									"value": "marketplace"
+								},
+								{
+									"key": "limit",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "shoppingcart",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://dsales-api.dev-energia.vodafone.es/api/shoppingCart/v4/shoppingCart?shoppingCartCharacteristic.value=Marketplace&limit=1&status=checkedOut&sort=-createdDate",
+							"protocol": "https",
+							"host": [
+								"dsales-api",
+								"dev-energia",
+								"vodafone",
+								"es"
+							],
+							"path": [
+								"api",
+								"shoppingCart",
+								"v4",
+								"shoppingCart"
+							],
+							"query": [
+								{
+									"key": "shoppingCartCharacteristic.value",
+									"value": "Marketplace"
+								},
+								{
+									"key": "limit",
+									"value": "1"
+								},
+								{
+									"key": "status",
+									"value": "checkedOut"
+								},
+								{
+									"key": "sort",
+									"value": "-createdDate"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create DEV shoppingcart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);  \r",
+									"pm.collectionVariables.set(\"shoppingCartId\", jsonData.id);\r",
+									"pm.collectionVariables.set(\"customerId\", jsonData.relatedParty[0].id); \r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"shoppingCartCharacteristic\": [\r\n        {\r\n            \"name\": \"shipping_zone\",\r\n            \"valueType\": \"string\",\r\n            \"value\": \"SP1\"\r\n        },\r\n        {\r\n            \"name\": \"Marketplace_Platforms\",\r\n            \"valueType\": \"string\",\r\n            \"value\": \"Marketplace\"\r\n        },\r\n        {\r\n            \"name\": \"Ip_client\",\r\n            \"valueType\": \"string\",\r\n            \"value\": \"212.166.209.18\"\r\n        },\r\n        {\r\n            \"name\": \"siteID\",\r\n            \"valueType\": \"string\",\r\n            \"value\": \"129804774\"\r\n        },\r\n        {\r\n            \"name\": \"Friendly_Order_ID\",\r\n            \"valueType\": \"integer\",\r\n            \"value\": \"230113000011\"\r\n        },\r\n        {\r\n            \"name\": \"Payment_Token\",\r\n            \"valueType\": \"STRING\",\r\n            \"value\": \"eyJ0b2tlbiI6bnVsbCwic2hvcHBpbmdDYXJ0SWQiOm51bGwsImZyaWVuZGx5T3JkZXJOdW1iZXIiOiIyMzAxMTMwMDAwMTEifQ==\"\r\n        },\r\n        {\r\n            \"name\": \"partnerPaymentTokenId\",\r\n            \"valueType\": \"string\",\r\n            \"value\": \"63c15304347fc70eab9bd35e\",\r\n            \"@baseType\": \"Characteristic\",\r\n            \"@type\": \"Characteristic\"\r\n        }\r\n    ],\r\n    \"cartItem\": [\r\n        {\r\n            \"id\": \"2056\",\r\n            \"quantity\": 1,\r\n            \"action\": \"add\",\r\n            \"itemPrice\": [\r\n                {\r\n                    \"name\": \"Offer_Price\",\r\n                    \"priceType\": \"Offer_Price\",\r\n                    \"price\": {\r\n                        \"taxRate\": 21.0,\r\n                        \"taxIncludedAmount\": {\r\n                            \"unit\": \"EUR\",\r\n                            \"value\": 164.0\r\n                        }\r\n                    }\r\n                },\r\n                {\r\n                    \"name\": \"Line_Price\",\r\n                    \"priceType\": \"Line_Price\",\r\n                    \"price\": {\r\n                        \"taxRate\": 21.0,\r\n                        \"taxIncludedAmount\": {\r\n                            \"unit\": \"EUR\",\r\n                            \"value\": 164.0\r\n                        }\r\n                    }\r\n                },\r\n                {\r\n                    \"name\": \"Line_Shipping_Price\",\r\n                    \"priceType\": \"Line_Shipping_Price\",\r\n                    \"price\": {\r\n                        \"taxRate\": 21.0,\r\n                        \"taxIncludedAmount\": {\r\n                            \"unit\": \"EUR\",\r\n                            \"value\": 0.0\r\n                        }\r\n                    }\r\n                },\r\n                {\r\n                    \"name\": \"Line_Total_Price\",\r\n                    \"priceType\": \"Line_Total_Price\",\r\n                    \"price\": {\r\n                        \"taxRate\": 21.0,\r\n                        \"taxIncludedAmount\": {\r\n                            \"unit\": \"EUR\",\r\n                            \"value\": 164.0\r\n                        }\r\n                    }\r\n                },\r\n                {\r\n                    \"name\": \"offeringPrice\",\r\n                    \"priceType\": \"offeringPrice\",\r\n                    \"price\": {\r\n                        \"taxRate\": 21.0,\r\n                        \"taxIncludedAmount\": {\r\n                            \"unit\": \"EUR\",\r\n                            \"value\": 164.0\r\n                        }\r\n                    }\r\n                }\r\n            ],\r\n            \"note\": [\r\n                {\r\n                    \"id\": \"1\",\r\n                    \"text\": \"Logistic_Order\"\r\n                }\r\n            ],\r\n            \"product\": {\r\n                \"productCharacteristic\": [\r\n                    {\r\n                        \"name\": \"Offer_Quantity\",\r\n                        \"valueType\": \"string\",\r\n                        \"value\": \"50\"\r\n                    },\r\n                    {\r\n                        \"name\": \"selected_shipping_type_code\",\r\n                        \"valueType\": \"string\",\r\n                        \"value\": \"24H\"\r\n                    },\r\n                    {\r\n                        \"name\": \"cut_off_time\",\r\n                        \"valueType\": \"string\",\r\n                        \"value\": \"null\"\r\n                    },\r\n                    {\r\n                        \"name\": \"minDeliveryDays\",\r\n                        \"valueType\": \"integer\",\r\n                        \"value\": \"5\"\r\n                    },\r\n                    {\r\n                        \"name\": \"maxDeliveryDays\",\r\n                        \"valueType\": \"integer\",\r\n                        \"value\": \"5\"\r\n                    },\r\n                    {\r\n                        \"name\": \"Seller_Name\",\r\n                        \"valueType\": \"string\",\r\n                        \"value\": \"Tienda Prueba\"\r\n                    },\r\n                    {\r\n                        \"name\": \"ean\",\r\n                        \"valueType\": \"string\",\r\n                        \"value\": \"9877332227\"\r\n                    },\r\n                    {\r\n                        \"name\": \"imagen\",\r\n                        \"valueType\": \"string\",\r\n                        \"value\": \"https://media-dev-eu-2.mirakl.net/SOURCE/5ebdd716cda94fccac65c889583d9742\"\r\n                    },\r\n                    {\r\n                        \"name\": \"Color\",\r\n                        \"valueType\": \"string\",\r\n                        \"value\": \"Azul\"\r\n                    },\r\n                    {\r\n                        \"name\": \"Capacidad de memoria (GB)\",\r\n                        \"valueType\": \"string\",\r\n                        \"value\": \"1024\"\r\n                    }\r\n                ],\r\n                \"productSpecification\": {\r\n                    \"id\": \"94017554-2983-4141-875f-40ac02cdd7aa\",\r\n                    \"name\": \"iStorage diskAshur2 SSD 1Tb Azul\"\r\n                }\r\n            },\r\n            \"productOffering\": {\r\n                \"id\": \"e0b0b725-c4e6-47e3-90f7-26b82c3047cd\",\r\n                \"href\": \"/api/productCatalogManagement/v4/productOffering/e0b0b725-c4e6-47e3-90f7-26b82c3047cd\"\r\n            },\r\n            \"status\": \"active\"\r\n        }\r\n    ],\r\n    \"status\": \"checkedOut\",\r\n    \"contact\": [\r\n        {\r\n            \"contactName\": \"SDJ, LLG DSR\",\r\n            \"contactType\": \"DeliveryContact\",\r\n            \"contactMedium\": [\r\n                {\r\n                    \"mediumType\": \"Document\",\r\n                    \"characteristic\": {\r\n                        \"contactType\": \"Document_identifier\",\r\n                        \"socialNetworkId\": \"19465711Y\",\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\"\r\n                    }\r\n                },\r\n                {\r\n                    \"mediumType\": \"Mobile_Phone\",\r\n                    \"characteristic\": {\r\n                        \"contactType\": \"Mobile_Number\",\r\n                        \"phoneNumber\": \"686846555\",\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\"\r\n                    }\r\n                },\r\n                {\r\n                    \"mediumType\": \"Email\",\r\n                    \"characteristic\": {\r\n                        \"contactType\": \"Personal_Email\",\r\n                        \"emailAddress\": \"268437170@xxxx.es\",\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\"\r\n                    }\r\n                },\r\n                {\r\n                    \"mediumType\": \"Address\",\r\n                    \"characteristic\": {\r\n                        \"contactType\": \"Address\",\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\",\r\n                        \"place\": [\r\n                            {\r\n                                \"id\": \"ae506d39-7890-4471-a95a-21c96a140d49\",\r\n                                \"href\": \"/api/geographicAddressManagement/v4/geographicAddress/ae506d39-7890-4471-a95a-21c96a140d49\",\r\n                                \"role\": \"GeographicAddress\",\r\n                                \"@baseType\": \"RelatedPlaceRef\",\r\n                                \"@schemaLocation\": \"/api/shoppingCart/v4/schema/relatedplacereforvalue.json\",\r\n                                \"@type\": \"RelatedPlaceRef\",\r\n                                \"@referredType\": \"RelatedPlaceRef\"\r\n                            }\r\n                        ]\r\n                    }\r\n                }\r\n            ],\r\n            \"validFor\": {},\r\n            \"@baseType\": \"Contact\",\r\n            \"@schemaLocation\": \"/api/shoppingCart/v4/schema/contact.json\",\r\n            \"@type\": \"Contact\"\r\n        },\r\n        {\r\n            \"contactName\": \"SDJ, LLG DSR\",\r\n            \"contactType\": \"BillingContact\",\r\n            \"contactMedium\": [\r\n                {\r\n                    \"mediumType\": \"Document\",\r\n                    \"characteristic\": {\r\n                        \"contactType\": \"Document_identifier\",\r\n                        \"socialNetworkId\": \"19465711Y\",\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\"\r\n                    }\r\n                },\r\n                {\r\n                    \"mediumType\": \"Mobile_Phone\",\r\n                    \"characteristic\": {\r\n                        \"contactType\": \"Mobile_Number\",\r\n                        \"phoneNumber\": \"686846555\",\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\"\r\n                    }\r\n                },\r\n                {\r\n                    \"mediumType\": \"Email\",\r\n                    \"characteristic\": {\r\n                        \"contactType\": \"Personal_Email\",\r\n                        \"emailAddress\": \"268437170@xxxx.es\",\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\"\r\n                    }\r\n                },\r\n                {\r\n                    \"mediumType\": \"Address\",\r\n                    \"characteristic\": {\r\n                        \"contactType\": \"Address\",\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\",\r\n                        \"place\": [\r\n                            {\r\n                                \"id\": \"f2aedd19-160a-4604-ac29-e0c588176085\",\r\n                                \"href\": \"/api/geographicAddressManagement/v4/geographicAddress/f2aedd19-160a-4604-ac29-e0c588176085\",\r\n                                \"role\": \"GeographicAddress\",\r\n                                \"@baseType\": \"RelatedPlaceRef\",\r\n                                \"@schemaLocation\": \"/api/shoppingCart/v4/schema/relatedplacereforvalue.json\",\r\n                                \"@type\": \"RelatedPlaceRef\",\r\n                                \"@referredType\": \"RelatedPlaceRef\"\r\n                            }\r\n                        ]\r\n                    }\r\n                }\r\n            ],\r\n            \"validFor\": {},\r\n            \"@baseType\": \"Contact\",\r\n            \"@schemaLocation\": \"/api/shoppingCart/v4/schema/contact.json\",\r\n            \"@type\": \"Contact\"\r\n        }\r\n    ],\r\n    \"relatedParty\": [\r\n        {\r\n            \"id\": \"f59e1d6d-6045-4d97-b077-27bb17e545a7\",\r\n            \"href\": \"/api/customerManagement/v4/customer/f59e1d6d-6045-4d97-b077-27bb17e545a7\",\r\n            \"name\": \"SDJ DSR LLG\",\r\n            \"role\": \"Customer\",\r\n            \"@referredType\": \"Customer\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dsales}}/api/shoppingCart/v4/shoppingCart",
+							"host": [
+								"{{dsales}}"
+							],
+							"path": [
+								"api",
+								"shoppingCart",
+								"v4",
+								"shoppingCart"
+							],
+							"query": [
+								{
+									"key": "shoppingCartCharacteristic.value",
+									"value": "Marketplace",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create PPRD shoppingcart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);  \r",
+									"pm.collectionVariables.set(\"shoppingCartId\", jsonData.id);\r",
+									"pm.collectionVariables.set(\"customerId\", jsonData.relatedParty[0].id); \r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"shoppingCartCharacteristic\": [\r\n        {\r\n            \"name\": \"shipping_zone\",\r\n            \"valueType\": \"string\",\r\n            \"value\": \"SP1\"\r\n        },\r\n        {\r\n            \"name\": \"Marketplace_Platforms\",\r\n            \"valueType\": \"string\",\r\n            \"value\": \"Marketplace\"\r\n        },\r\n        {\r\n            \"name\": \"Ip_client\",\r\n            \"valueType\": \"string\",\r\n            \"value\": \"212.166.209.18\"\r\n        },\r\n        {\r\n            \"name\": \"siteID\",\r\n            \"valueType\": \"string\",\r\n            \"value\": \"129804774\"\r\n        },\r\n        {\r\n            \"name\": \"Friendly_Order_ID\",\r\n            \"valueType\": \"integer\",\r\n            \"value\": \"230113000011\"\r\n        },\r\n        {\r\n            \"name\": \"Payment_Token\",\r\n            \"valueType\": \"STRING\",\r\n            \"value\": \"eyJ0b2tlbiI6bnVsbCwic2hvcHBpbmdDYXJ0SWQiOm51bGwsImZyaWVuZGx5T3JkZXJOdW1iZXIiOiIyMzAxMTMwMDAwMTEifQ==\"\r\n        },\r\n        {\r\n            \"name\": \"partnerPaymentTokenId\",\r\n            \"valueType\": \"string\",\r\n            \"value\": \"63c15304347fc70eab9bd35e\",\r\n            \"@baseType\": \"Characteristic\",\r\n            \"@type\": \"Characteristic\"\r\n        }\r\n    ],\r\n    \"cartItem\": [\r\n        {\r\n            \"id\": \"2056\",\r\n            \"quantity\": 1,\r\n            \"action\": \"add\",\r\n            \"itemPrice\": [\r\n                {\r\n                    \"name\": \"Offer_Price\",\r\n                    \"priceType\": \"Offer_Price\",\r\n                    \"price\": {\r\n                        \"taxRate\": 21.0,\r\n                        \"taxIncludedAmount\": {\r\n                            \"unit\": \"EUR\",\r\n                            \"value\": 164.0\r\n                        }\r\n                    }\r\n                },\r\n                {\r\n                    \"name\": \"Line_Price\",\r\n                    \"priceType\": \"Line_Price\",\r\n                    \"price\": {\r\n                        \"taxRate\": 21.0,\r\n                        \"taxIncludedAmount\": {\r\n                            \"unit\": \"EUR\",\r\n                            \"value\": 164.0\r\n                        }\r\n                    }\r\n                },\r\n                {\r\n                    \"name\": \"Line_Shipping_Price\",\r\n                    \"priceType\": \"Line_Shipping_Price\",\r\n                    \"price\": {\r\n                        \"taxRate\": 21.0,\r\n                        \"taxIncludedAmount\": {\r\n                            \"unit\": \"EUR\",\r\n                            \"value\": 0.0\r\n                        }\r\n                    }\r\n                },\r\n                {\r\n                    \"name\": \"Line_Total_Price\",\r\n                    \"priceType\": \"Line_Total_Price\",\r\n                    \"price\": {\r\n                        \"taxRate\": 21.0,\r\n                        \"taxIncludedAmount\": {\r\n                            \"unit\": \"EUR\",\r\n                            \"value\": 164.0\r\n                        }\r\n                    }\r\n                },\r\n                {\r\n                    \"name\": \"offeringPrice\",\r\n                    \"priceType\": \"offeringPrice\",\r\n                    \"price\": {\r\n                        \"taxRate\": 21.0,\r\n                        \"taxIncludedAmount\": {\r\n                            \"unit\": \"EUR\",\r\n                            \"value\": 164.0\r\n                        }\r\n                    }\r\n                }\r\n            ],\r\n            \"note\": [\r\n                {\r\n                    \"id\": \"1\",\r\n                    \"text\": \"Logistic_Order\"\r\n                }\r\n            ],\r\n            \"product\": {\r\n                \"productCharacteristic\": [\r\n                    {\r\n                        \"name\": \"Offer_Quantity\",\r\n                        \"valueType\": \"string\",\r\n                        \"value\": \"50\"\r\n                    },\r\n                    {\r\n                        \"name\": \"selected_shipping_type_code\",\r\n                        \"valueType\": \"string\",\r\n                        \"value\": \"24H\"\r\n                    },\r\n                    {\r\n                        \"name\": \"cut_off_time\",\r\n                        \"valueType\": \"string\",\r\n                        \"value\": \"null\"\r\n                    },\r\n                    {\r\n                        \"name\": \"minDeliveryDays\",\r\n                        \"valueType\": \"integer\",\r\n                        \"value\": \"5\"\r\n                    },\r\n                    {\r\n                        \"name\": \"maxDeliveryDays\",\r\n                        \"valueType\": \"integer\",\r\n                        \"value\": \"5\"\r\n                    },\r\n                    {\r\n                        \"name\": \"Seller_Name\",\r\n                        \"valueType\": \"string\",\r\n                        \"value\": \"Tienda Prueba\"\r\n                    },\r\n                    {\r\n                        \"name\": \"ean\",\r\n                        \"valueType\": \"string\",\r\n                        \"value\": \"9877332227\"\r\n                    },\r\n                    {\r\n                        \"name\": \"imagen\",\r\n                        \"valueType\": \"string\",\r\n                        \"value\": \"https://media-dev-eu-2.mirakl.net/SOURCE/5ebdd716cda94fccac65c889583d9742\"\r\n                    },\r\n                    {\r\n                        \"name\": \"Color\",\r\n                        \"valueType\": \"string\",\r\n                        \"value\": \"Azul\"\r\n                    },\r\n                    {\r\n                        \"name\": \"Capacidad de memoria (GB)\",\r\n                        \"valueType\": \"string\",\r\n                        \"value\": \"1024\"\r\n                    }\r\n                ],\r\n                \"productSpecification\": {\r\n                    \"id\": \"94017554-2983-4141-875f-40ac02cdd7aa\",\r\n                    \"name\": \"iStorage diskAshur2 SSD 1Tb Azul\"\r\n                }\r\n            },\r\n            \"productOffering\": {\r\n                \"id\": \"e0b0b725-c4e6-47e3-90f7-26b82c3047cd\",\r\n                \"href\": \"/api/productCatalogManagement/v4/productOffering/e0b0b725-c4e6-47e3-90f7-26b82c3047cd\"\r\n            },\r\n            \"status\": \"active\"\r\n        }\r\n    ],\r\n    \"status\": \"checkedOut\",\r\n    \"contact\": [\r\n        {\r\n            \"contactName\": \"SDJ, LLG DSR\",\r\n            \"contactType\": \"DeliveryContact\",\r\n            \"contactMedium\": [\r\n                {\r\n                    \"mediumType\": \"Document\",\r\n                    \"characteristic\": {\r\n                        \"contactType\": \"Document_identifier\",\r\n                        \"socialNetworkId\": \"19465711Y\",\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\"\r\n                    }\r\n                },\r\n                {\r\n                    \"mediumType\": \"Mobile_Phone\",\r\n                    \"characteristic\": {\r\n                        \"contactType\": \"Mobile_Number\",\r\n                        \"phoneNumber\": \"686846555\",\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\"\r\n                    }\r\n                },\r\n                {\r\n                    \"mediumType\": \"Email\",\r\n                    \"characteristic\": {\r\n                        \"contactType\": \"Personal_Email\",\r\n                        \"emailAddress\": \"268437170@xxxx.es\",\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\"\r\n                    }\r\n                },\r\n                {\r\n                    \"mediumType\": \"Address\",\r\n                    \"characteristic\": {\r\n                        \"contactType\": \"Address\",\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\",\r\n                        \"place\": [\r\n                            {\r\n                                \"id\": \"ae506d39-7890-4471-a95a-21c96a140d49\",\r\n                                \"href\": \"/api/geographicAddressManagement/v4/geographicAddress/ae506d39-7890-4471-a95a-21c96a140d49\",\r\n                                \"role\": \"GeographicAddress\",\r\n                                \"@baseType\": \"RelatedPlaceRef\",\r\n                                \"@schemaLocation\": \"/api/shoppingCart/v4/schema/relatedplacereforvalue.json\",\r\n                                \"@type\": \"RelatedPlaceRef\",\r\n                                \"@referredType\": \"RelatedPlaceRef\"\r\n                            }\r\n                        ]\r\n                    }\r\n                }\r\n            ],\r\n            \"validFor\": {},\r\n            \"@baseType\": \"Contact\",\r\n            \"@schemaLocation\": \"/api/shoppingCart/v4/schema/contact.json\",\r\n            \"@type\": \"Contact\"\r\n        },\r\n        {\r\n            \"contactName\": \"SDJ, LLG DSR\",\r\n            \"contactType\": \"BillingContact\",\r\n            \"contactMedium\": [\r\n                {\r\n                    \"mediumType\": \"Document\",\r\n                    \"characteristic\": {\r\n                        \"contactType\": \"Document_identifier\",\r\n                        \"socialNetworkId\": \"19465711Y\",\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\"\r\n                    }\r\n                },\r\n                {\r\n                    \"mediumType\": \"Mobile_Phone\",\r\n                    \"characteristic\": {\r\n                        \"contactType\": \"Mobile_Number\",\r\n                        \"phoneNumber\": \"686846555\",\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\"\r\n                    }\r\n                },\r\n                {\r\n                    \"mediumType\": \"Email\",\r\n                    \"characteristic\": {\r\n                        \"contactType\": \"Personal_Email\",\r\n                        \"emailAddress\": \"268437170@xxxx.es\",\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\"\r\n                    }\r\n                },\r\n                {\r\n                    \"mediumType\": \"Address\",\r\n                    \"characteristic\": {\r\n                        \"contactType\": \"Address\",\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\",\r\n                        \"place\": [\r\n                            {\r\n                                \"id\": \"f2aedd19-160a-4604-ac29-e0c588176085\",\r\n                                \"href\": \"/api/geographicAddressManagement/v4/geographicAddress/f2aedd19-160a-4604-ac29-e0c588176085\",\r\n                                \"role\": \"GeographicAddress\",\r\n                                \"@baseType\": \"RelatedPlaceRef\",\r\n                                \"@schemaLocation\": \"/api/shoppingCart/v4/schema/relatedplacereforvalue.json\",\r\n                                \"@type\": \"RelatedPlaceRef\",\r\n                                \"@referredType\": \"RelatedPlaceRef\"\r\n                            }\r\n                        ]\r\n                    }\r\n                }\r\n            ],\r\n            \"validFor\": {},\r\n            \"@baseType\": \"Contact\",\r\n            \"@schemaLocation\": \"/api/shoppingCart/v4/schema/contact.json\",\r\n            \"@type\": \"Contact\"\r\n        }\r\n    ],\r\n    \"relatedParty\": [\r\n        {\r\n            \"id\": \"f59e1d6d-6045-4d97-b077-27bb17e545a7\",\r\n            \"href\": \"/api/customerManagement/v4/customer/f59e1d6d-6045-4d97-b077-27bb17e545a7\",\r\n            \"name\": \"SDJ DSR LLG\",\r\n            \"role\": \"Customer\",\r\n            \"@referredType\": \"Customer\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dsales}}/api/shoppingCart/v4/shoppingCart",
+							"host": [
+								"{{dsales}}"
+							],
+							"path": [
+								"api",
+								"shoppingCart",
+								"v4",
+								"shoppingCart"
+							],
+							"query": [
+								{
+									"key": "shoppingCartCharacteristic.value",
+									"value": "Marketplace",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createOrder",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);  \r",
+									"pm.collectionVariables.set(\"productOrderId\", jsonData.id);\r",
+									"pm.collectionVariables.set(\"productOrderItemId\", jsonData.productOrderItem[0].id);\r",
+									"pm.collectionVariables.set(\"productOrderExternalId\", jsonData.externalId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"shoppingCartId\": \"{{shoppingCartId}}\"\r\n}"
+						},
+						"url": {
+							"raw": "{{marketplace-ui-backend}}/api/ui-backend/order/product-order",
+							"host": [
+								"{{marketplace-ui-backend}}"
+							],
+							"path": [
+								"api",
+								"ui-backend",
+								"order",
+								"product-order"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Create Deactivation Order",
+			"item": [
+				{
+					"name": "productOrder",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{dpom}}/api/productOrderingManagement/v4/productOrder?depth=3&sort=-createdDate&category=marketplace&limit=1",
+							"host": [
+								"{{dpom}}"
+							],
+							"path": [
+								"api",
+								"productOrderingManagement",
+								"v4",
+								"productOrder"
+							],
+							"query": [
+								{
+									"key": "externalId",
+									"value": "220727000001",
+									"disabled": true
+								},
+								{
+									"key": "id",
+									"value": "ecf0d617-fd20-4302-80a1-b1c9544bf3ee",
+									"disabled": true
+								},
+								{
+									"key": "id",
+									"value": "aba9faf5-9276-42c6-8936-4ef89835fcc8",
+									"disabled": true
+								},
+								{
+									"key": "id",
+									"value": "95f335f9-13c6-11ed-b4af-a655ea27c35b",
+									"disabled": true
+								},
+								{
+									"key": "id",
+									"value": "8106e3c4-85e3-43d5-8a5e-eee6a3cd3de6",
+									"disabled": true
+								},
+								{
+									"key": "depth",
+									"value": "3"
+								},
+								{
+									"key": "sort",
+									"value": "-createdDate"
+								},
+								{
+									"key": "id",
+									"value": "818b6774-81bb-481e-8b05-1fdc32842a15",
+									"disabled": true
+								},
+								{
+									"key": "category",
+									"value": "marketplace"
+								},
+								{
+									"key": "limit",
+									"value": "1"
+								},
+								{
+									"key": "productOrderItem.action",
+									"value": "delete",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "shoppingcart",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://dsales-api.dev-energia.vodafone.es/api/shoppingCart/v4/shoppingCart?shoppingCartCharacteristic.value=Marketplace&limit=1&status=checkedOut&sort=-createdDate",
+							"protocol": "https",
+							"host": [
+								"dsales-api",
+								"dev-energia",
+								"vodafone",
+								"es"
+							],
+							"path": [
+								"api",
+								"shoppingCart",
+								"v4",
+								"shoppingCart"
+							],
+							"query": [
+								{
+									"key": "shoppingCartCharacteristic.value",
+									"value": "Marketplace"
+								},
+								{
+									"key": "limit",
+									"value": "1"
+								},
+								{
+									"key": "status",
+									"value": "checkedOut"
+								},
+								{
+									"key": "sort",
+									"value": "-createdDate"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DEV - create shoppingcart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);  \r",
+									"pm.collectionVariables.set(\"shoppingCartId\", jsonData.id);\r",
+									"pm.collectionVariables.set(\"customerId\", jsonData.relatedParty[0].id); \r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"shoppingCartCharacteristic\": [\r\n        {\r\n            \"name\": \"shipping_zone\",\r\n            \"valueType\": \"string\",\r\n            \"value\": \"SP1\"\r\n        },\r\n        {\r\n            \"name\": \"Marketplace_Platforms\",\r\n            \"valueType\": \"string\",\r\n            \"value\": \"Marketplace\"\r\n        },\r\n        {\r\n            \"name\": \"Ip_client\",\r\n            \"valueType\": \"string\",\r\n            \"value\": \"212.166.209.18\"\r\n        },\r\n        {\r\n            \"name\": \"siteID\",\r\n            \"valueType\": \"string\",\r\n            \"value\": \"129804774\"\r\n        },\r\n        {\r\n            \"name\": \"Friendly_Order_ID\",\r\n            \"valueType\": \"integer\",\r\n            \"value\": \"230113000011\"\r\n        },\r\n        {\r\n            \"name\": \"Payment_Token\",\r\n            \"valueType\": \"STRING\",\r\n            \"value\": \"eyJ0b2tlbiI6bnVsbCwic2hvcHBpbmdDYXJ0SWQiOm51bGwsImZyaWVuZGx5T3JkZXJOdW1iZXIiOiIyMzAxMTMwMDAwMTEifQ==\"\r\n        },\r\n        {\r\n            \"name\": \"partnerPaymentTokenId\",\r\n            \"valueType\": \"string\",\r\n            \"value\": \"63c15304347fc70eab9bd35e\",\r\n            \"@baseType\": \"Characteristic\",\r\n            \"@type\": \"Characteristic\"\r\n        }\r\n    ],\r\n    \"cartItem\": [\r\n        {\r\n            \"id\": \"2056\",\r\n            \"quantity\": 1,\r\n            \"action\": \"add\",\r\n            \"itemPrice\": [\r\n                {\r\n                    \"name\": \"Offer_Price\",\r\n                    \"priceType\": \"Offer_Price\",\r\n                    \"price\": {\r\n                        \"taxRate\": 21.0,\r\n                        \"taxIncludedAmount\": {\r\n                            \"unit\": \"EUR\",\r\n                            \"value\": 164.0\r\n                        }\r\n                    }\r\n                },\r\n                {\r\n                    \"name\": \"Line_Price\",\r\n                    \"priceType\": \"Line_Price\",\r\n                    \"price\": {\r\n                        \"taxRate\": 21.0,\r\n                        \"taxIncludedAmount\": {\r\n                            \"unit\": \"EUR\",\r\n                            \"value\": 164.0\r\n                        }\r\n                    }\r\n                },\r\n                {\r\n                    \"name\": \"Line_Shipping_Price\",\r\n                    \"priceType\": \"Line_Shipping_Price\",\r\n                    \"price\": {\r\n                        \"taxRate\": 21.0,\r\n                        \"taxIncludedAmount\": {\r\n                            \"unit\": \"EUR\",\r\n                            \"value\": 0.0\r\n                        }\r\n                    }\r\n                },\r\n                {\r\n                    \"name\": \"Line_Total_Price\",\r\n                    \"priceType\": \"Line_Total_Price\",\r\n                    \"price\": {\r\n                        \"taxRate\": 21.0,\r\n                        \"taxIncludedAmount\": {\r\n                            \"unit\": \"EUR\",\r\n                            \"value\": 164.0\r\n                        }\r\n                    }\r\n                },\r\n                {\r\n                    \"name\": \"offeringPrice\",\r\n                    \"priceType\": \"offeringPrice\",\r\n                    \"price\": {\r\n                        \"taxRate\": 21.0,\r\n                        \"taxIncludedAmount\": {\r\n                            \"unit\": \"EUR\",\r\n                            \"value\": 164.0\r\n                        }\r\n                    }\r\n                }\r\n            ],\r\n            \"note\": [\r\n                {\r\n                    \"id\": \"1\",\r\n                    \"text\": \"Logistic_Order\"\r\n                }\r\n            ],\r\n            \"product\": {\r\n                \"productCharacteristic\": [\r\n                    {\r\n                        \"name\": \"Offer_Quantity\",\r\n                        \"valueType\": \"string\",\r\n                        \"value\": \"50\"\r\n                    },\r\n                    {\r\n                        \"name\": \"selected_shipping_type_code\",\r\n                        \"valueType\": \"string\",\r\n                        \"value\": \"24H\"\r\n                    },\r\n                    {\r\n                        \"name\": \"cut_off_time\",\r\n                        \"valueType\": \"string\",\r\n                        \"value\": \"null\"\r\n                    },\r\n                    {\r\n                        \"name\": \"minDeliveryDays\",\r\n                        \"valueType\": \"integer\",\r\n                        \"value\": \"5\"\r\n                    },\r\n                    {\r\n                        \"name\": \"maxDeliveryDays\",\r\n                        \"valueType\": \"integer\",\r\n                        \"value\": \"5\"\r\n                    },\r\n                    {\r\n                        \"name\": \"Seller_Name\",\r\n                        \"valueType\": \"string\",\r\n                        \"value\": \"Tienda Prueba\"\r\n                    },\r\n                    {\r\n                        \"name\": \"ean\",\r\n                        \"valueType\": \"string\",\r\n                        \"value\": \"9877332227\"\r\n                    },\r\n                    {\r\n                        \"name\": \"imagen\",\r\n                        \"valueType\": \"string\",\r\n                        \"value\": \"https://media-dev-eu-2.mirakl.net/SOURCE/5ebdd716cda94fccac65c889583d9742\"\r\n                    },\r\n                    {\r\n                        \"name\": \"Color\",\r\n                        \"valueType\": \"string\",\r\n                        \"value\": \"Azul\"\r\n                    },\r\n                    {\r\n                        \"name\": \"Capacidad de memoria (GB)\",\r\n                        \"valueType\": \"string\",\r\n                        \"value\": \"1024\"\r\n                    }\r\n                ],\r\n                \"productSpecification\": {\r\n                    \"id\": \"94017554-2983-4141-875f-40ac02cdd7aa\",\r\n                    \"name\": \"iStorage diskAshur2 SSD 1Tb Azul\"\r\n                }\r\n            },\r\n            \"productOffering\": {\r\n                \"id\": \"e0b0b725-c4e6-47e3-90f7-26b82c3047cd\",\r\n                \"href\": \"/api/productCatalogManagement/v4/productOffering/e0b0b725-c4e6-47e3-90f7-26b82c3047cd\"\r\n            },\r\n            \"status\": \"active\"\r\n        }\r\n    ],\r\n    \"status\": \"checkedOut\",\r\n    \"contact\": [\r\n        {\r\n            \"contactName\": \"SDJ, LLG DSR\",\r\n            \"contactType\": \"DeliveryContact\",\r\n            \"contactMedium\": [\r\n                {\r\n                    \"mediumType\": \"Document\",\r\n                    \"characteristic\": {\r\n                        \"contactType\": \"Document_identifier\",\r\n                        \"socialNetworkId\": \"19465711Y\",\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\"\r\n                    }\r\n                },\r\n                {\r\n                    \"mediumType\": \"Mobile_Phone\",\r\n                    \"characteristic\": {\r\n                        \"contactType\": \"Mobile_Number\",\r\n                        \"phoneNumber\": \"686846555\",\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\"\r\n                    }\r\n                },\r\n                {\r\n                    \"mediumType\": \"Email\",\r\n                    \"characteristic\": {\r\n                        \"contactType\": \"Personal_Email\",\r\n                        \"emailAddress\": \"268437170@xxxx.es\",\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\"\r\n                    }\r\n                },\r\n                {\r\n                    \"mediumType\": \"Address\",\r\n                    \"characteristic\": {\r\n                        \"contactType\": \"Address\",\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\",\r\n                        \"place\": [\r\n                            {\r\n                                \"id\": \"ae506d39-7890-4471-a95a-21c96a140d49\",\r\n                                \"href\": \"/api/geographicAddressManagement/v4/geographicAddress/ae506d39-7890-4471-a95a-21c96a140d49\",\r\n                                \"role\": \"GeographicAddress\",\r\n                                \"@baseType\": \"RelatedPlaceRef\",\r\n                                \"@schemaLocation\": \"/api/shoppingCart/v4/schema/relatedplacereforvalue.json\",\r\n                                \"@type\": \"RelatedPlaceRef\",\r\n                                \"@referredType\": \"RelatedPlaceRef\"\r\n                            }\r\n                        ]\r\n                    }\r\n                }\r\n            ],\r\n            \"validFor\": {},\r\n            \"@baseType\": \"Contact\",\r\n            \"@schemaLocation\": \"/api/shoppingCart/v4/schema/contact.json\",\r\n            \"@type\": \"Contact\"\r\n        },\r\n        {\r\n            \"contactName\": \"SDJ, LLG DSR\",\r\n            \"contactType\": \"BillingContact\",\r\n            \"contactMedium\": [\r\n                {\r\n                    \"mediumType\": \"Document\",\r\n                    \"characteristic\": {\r\n                        \"contactType\": \"Document_identifier\",\r\n                        \"socialNetworkId\": \"19465711Y\",\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\"\r\n                    }\r\n                },\r\n                {\r\n                    \"mediumType\": \"Mobile_Phone\",\r\n                    \"characteristic\": {\r\n                        \"contactType\": \"Mobile_Number\",\r\n                        \"phoneNumber\": \"686846555\",\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\"\r\n                    }\r\n                },\r\n                {\r\n                    \"mediumType\": \"Email\",\r\n                    \"characteristic\": {\r\n                        \"contactType\": \"Personal_Email\",\r\n                        \"emailAddress\": \"268437170@xxxx.es\",\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\"\r\n                    }\r\n                },\r\n                {\r\n                    \"mediumType\": \"Address\",\r\n                    \"characteristic\": {\r\n                        \"contactType\": \"Address\",\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\",\r\n                        \"place\": [\r\n                            {\r\n                                \"id\": \"f2aedd19-160a-4604-ac29-e0c588176085\",\r\n                                \"href\": \"/api/geographicAddressManagement/v4/geographicAddress/f2aedd19-160a-4604-ac29-e0c588176085\",\r\n                                \"role\": \"GeographicAddress\",\r\n                                \"@baseType\": \"RelatedPlaceRef\",\r\n                                \"@schemaLocation\": \"/api/shoppingCart/v4/schema/relatedplacereforvalue.json\",\r\n                                \"@type\": \"RelatedPlaceRef\",\r\n                                \"@referredType\": \"RelatedPlaceRef\"\r\n                            }\r\n                        ]\r\n                    }\r\n                }\r\n            ],\r\n            \"validFor\": {},\r\n            \"@baseType\": \"Contact\",\r\n            \"@schemaLocation\": \"/api/shoppingCart/v4/schema/contact.json\",\r\n            \"@type\": \"Contact\"\r\n        }\r\n    ],\r\n    \"relatedParty\": [\r\n        {\r\n            \"id\": \"f59e1d6d-6045-4d97-b077-27bb17e545a7\",\r\n            \"href\": \"/api/customerManagement/v4/customer/f59e1d6d-6045-4d97-b077-27bb17e545a7\",\r\n            \"name\": \"SDJ DSR LLG\",\r\n            \"role\": \"Customer\",\r\n            \"@referredType\": \"Customer\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dsales}}/api/shoppingCart/v4/shoppingCart",
+							"host": [
+								"{{dsales}}"
+							],
+							"path": [
+								"api",
+								"shoppingCart",
+								"v4",
+								"shoppingCart"
+							],
+							"query": [
+								{
+									"key": "shoppingCartCharacteristic.value",
+									"value": "Marketplace",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PPRD - create shoppingcart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);  \r",
+									"pm.collectionVariables.set(\"shoppingCartId\", jsonData.id);\r",
+									"pm.collectionVariables.set(\"customerId\", jsonData.relatedParty[0].id); \r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"shoppingCartCharacteristic\": [\r\n        {\r\n            \"name\": \"shipping_zone\",\r\n            \"valueType\": \"string\",\r\n            \"value\": \"SP1\"\r\n        },\r\n        {\r\n            \"name\": \"Marketplace_Platforms\",\r\n            \"valueType\": \"string\",\r\n            \"value\": \"Marketplace\"\r\n        },\r\n        {\r\n            \"name\": \"Ip_client\",\r\n            \"valueType\": \"string\",\r\n            \"value\": \"212.166.209.18\"\r\n        },\r\n        {\r\n            \"name\": \"siteID\",\r\n            \"valueType\": \"string\",\r\n            \"value\": \"129804774\"\r\n        },\r\n        {\r\n            \"name\": \"Friendly_Order_ID\",\r\n            \"valueType\": \"integer\",\r\n            \"value\": \"230113000011\"\r\n        },\r\n        {\r\n            \"name\": \"Payment_Token\",\r\n            \"valueType\": \"STRING\",\r\n            \"value\": \"eyJ0b2tlbiI6bnVsbCwic2hvcHBpbmdDYXJ0SWQiOm51bGwsImZyaWVuZGx5T3JkZXJOdW1iZXIiOiIyMzAxMTMwMDAwMTEifQ==\"\r\n        },\r\n        {\r\n            \"name\": \"partnerPaymentTokenId\",\r\n            \"valueType\": \"string\",\r\n            \"value\": \"63c15304347fc70eab9bd35e\",\r\n            \"@baseType\": \"Characteristic\",\r\n            \"@type\": \"Characteristic\"\r\n        }\r\n    ],\r\n    \"cartItem\": [\r\n        {\r\n            \"id\": \"2056\",\r\n            \"quantity\": 1,\r\n            \"action\": \"delete\",\r\n            \"itemPrice\": [\r\n                {\r\n                    \"name\": \"Offer_Price\",\r\n                    \"priceType\": \"Offer_Price\",\r\n                    \"price\": {\r\n                        \"taxRate\": 21.0,\r\n                        \"taxIncludedAmount\": {\r\n                            \"unit\": \"EUR\",\r\n                            \"value\": 164.0\r\n                        }\r\n                    }\r\n                },\r\n                {\r\n                    \"name\": \"Line_Price\",\r\n                    \"priceType\": \"Line_Price\",\r\n                    \"price\": {\r\n                        \"taxRate\": 21.0,\r\n                        \"taxIncludedAmount\": {\r\n                            \"unit\": \"EUR\",\r\n                            \"value\": 164.0\r\n                        }\r\n                    }\r\n                },\r\n                {\r\n                    \"name\": \"Line_Shipping_Price\",\r\n                    \"priceType\": \"Line_Shipping_Price\",\r\n                    \"price\": {\r\n                        \"taxRate\": 21.0,\r\n                        \"taxIncludedAmount\": {\r\n                            \"unit\": \"EUR\",\r\n                            \"value\": 0.0\r\n                        }\r\n                    }\r\n                },\r\n                {\r\n                    \"name\": \"Line_Total_Price\",\r\n                    \"priceType\": \"Line_Total_Price\",\r\n                    \"price\": {\r\n                        \"taxRate\": 21.0,\r\n                        \"taxIncludedAmount\": {\r\n                            \"unit\": \"EUR\",\r\n                            \"value\": 164.0\r\n                        }\r\n                    }\r\n                },\r\n                {\r\n                    \"name\": \"offeringPrice\",\r\n                    \"priceType\": \"offeringPrice\",\r\n                    \"price\": {\r\n                        \"taxRate\": 21.0,\r\n                        \"taxIncludedAmount\": {\r\n                            \"unit\": \"EUR\",\r\n                            \"value\": 164.0\r\n                        }\r\n                    }\r\n                }\r\n            ],\r\n            \"note\": [\r\n                {\r\n                    \"id\": \"1\",\r\n                    \"text\": \"Logistic_Order\"\r\n                }\r\n            ],\r\n            \"product\": {\r\n                \"productCharacteristic\": [\r\n                    {\r\n                        \"name\": \"Offer_Quantity\",\r\n                        \"valueType\": \"string\",\r\n                        \"value\": \"50\"\r\n                    },\r\n                    {\r\n                        \"name\": \"selected_shipping_type_code\",\r\n                        \"valueType\": \"string\",\r\n                        \"value\": \"24H\"\r\n                    },\r\n                    {\r\n                        \"name\": \"cut_off_time\",\r\n                        \"valueType\": \"string\",\r\n                        \"value\": \"null\"\r\n                    },\r\n                    {\r\n                        \"name\": \"minDeliveryDays\",\r\n                        \"valueType\": \"integer\",\r\n                        \"value\": \"5\"\r\n                    },\r\n                    {\r\n                        \"name\": \"maxDeliveryDays\",\r\n                        \"valueType\": \"integer\",\r\n                        \"value\": \"5\"\r\n                    },\r\n                    {\r\n                        \"name\": \"Seller_Name\",\r\n                        \"valueType\": \"string\",\r\n                        \"value\": \"Tienda Prueba\"\r\n                    },\r\n                    {\r\n                        \"name\": \"ean\",\r\n                        \"valueType\": \"string\",\r\n                        \"value\": \"9877332227\"\r\n                    },\r\n                    {\r\n                        \"name\": \"imagen\",\r\n                        \"valueType\": \"string\",\r\n                        \"value\": \"https://media-dev-eu-2.mirakl.net/SOURCE/5ebdd716cda94fccac65c889583d9742\"\r\n                    },\r\n                    {\r\n                        \"name\": \"Color\",\r\n                        \"valueType\": \"string\",\r\n                        \"value\": \"Azul\"\r\n                    },\r\n                    {\r\n                        \"name\": \"Capacidad de memoria (GB)\",\r\n                        \"valueType\": \"string\",\r\n                        \"value\": \"1024\"\r\n                    }\r\n                ],\r\n                \"productSpecification\": {\r\n                    \"id\": \"94017554-2983-4141-875f-40ac02cdd7aa\",\r\n                    \"name\": \"iStorage diskAshur2 SSD 1Tb Azul\"\r\n                }\r\n            },\r\n            \"productOffering\": {\r\n                \"id\": \"e0b0b725-c4e6-47e3-90f7-26b82c3047cd\",\r\n                \"href\": \"/api/productCatalogManagement/v4/productOffering/e0b0b725-c4e6-47e3-90f7-26b82c3047cd\"\r\n            },\r\n            \"status\": \"active\"\r\n        }\r\n    ],\r\n    \"status\": \"checkedOut\",\r\n    \"contact\": [\r\n        {\r\n            \"contactName\": \"SDJ, LLG DSR\",\r\n            \"contactType\": \"DeliveryContact\",\r\n            \"contactMedium\": [\r\n                {\r\n                    \"mediumType\": \"Document\",\r\n                    \"characteristic\": {\r\n                        \"contactType\": \"Document_identifier\",\r\n                        \"socialNetworkId\": \"19465711Y\",\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\"\r\n                    }\r\n                },\r\n                {\r\n                    \"mediumType\": \"Mobile_Phone\",\r\n                    \"characteristic\": {\r\n                        \"contactType\": \"Mobile_Number\",\r\n                        \"phoneNumber\": \"686846555\",\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\"\r\n                    }\r\n                },\r\n                {\r\n                    \"mediumType\": \"Email\",\r\n                    \"characteristic\": {\r\n                        \"contactType\": \"Personal_Email\",\r\n                        \"emailAddress\": \"268437170@xxxx.es\",\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\"\r\n                    }\r\n                },\r\n                {\r\n                    \"mediumType\": \"Address\",\r\n                    \"characteristic\": {\r\n                        \"contactType\": \"Address\",\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\",\r\n                        \"place\": [\r\n                            {\r\n                                \"id\": \"ae506d39-7890-4471-a95a-21c96a140d49\",\r\n                                \"href\": \"/api/geographicAddressManagement/v4/geographicAddress/ae506d39-7890-4471-a95a-21c96a140d49\",\r\n                                \"role\": \"GeographicAddress\",\r\n                                \"@baseType\": \"RelatedPlaceRef\",\r\n                                \"@schemaLocation\": \"/api/shoppingCart/v4/schema/relatedplacereforvalue.json\",\r\n                                \"@type\": \"RelatedPlaceRef\",\r\n                                \"@referredType\": \"RelatedPlaceRef\"\r\n                            }\r\n                        ]\r\n                    }\r\n                }\r\n            ],\r\n            \"validFor\": {},\r\n            \"@baseType\": \"Contact\",\r\n            \"@schemaLocation\": \"/api/shoppingCart/v4/schema/contact.json\",\r\n            \"@type\": \"Contact\"\r\n        },\r\n        {\r\n            \"contactName\": \"SDJ, LLG DSR\",\r\n            \"contactType\": \"BillingContact\",\r\n            \"contactMedium\": [\r\n                {\r\n                    \"mediumType\": \"Document\",\r\n                    \"characteristic\": {\r\n                        \"contactType\": \"Document_identifier\",\r\n                        \"socialNetworkId\": \"19465711Y\",\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\"\r\n                    }\r\n                },\r\n                {\r\n                    \"mediumType\": \"Mobile_Phone\",\r\n                    \"characteristic\": {\r\n                        \"contactType\": \"Mobile_Number\",\r\n                        \"phoneNumber\": \"686846555\",\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\"\r\n                    }\r\n                },\r\n                {\r\n                    \"mediumType\": \"Email\",\r\n                    \"characteristic\": {\r\n                        \"contactType\": \"Personal_Email\",\r\n                        \"emailAddress\": \"268437170@xxxx.es\",\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\"\r\n                    }\r\n                },\r\n                {\r\n                    \"mediumType\": \"Address\",\r\n                    \"characteristic\": {\r\n                        \"contactType\": \"Address\",\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\",\r\n                        \"place\": [\r\n                            {\r\n                                \"id\": \"f2aedd19-160a-4604-ac29-e0c588176085\",\r\n                                \"href\": \"/api/geographicAddressManagement/v4/geographicAddress/f2aedd19-160a-4604-ac29-e0c588176085\",\r\n                                \"role\": \"GeographicAddress\",\r\n                                \"@baseType\": \"RelatedPlaceRef\",\r\n                                \"@schemaLocation\": \"/api/shoppingCart/v4/schema/relatedplacereforvalue.json\",\r\n                                \"@type\": \"RelatedPlaceRef\",\r\n                                \"@referredType\": \"RelatedPlaceRef\"\r\n                            }\r\n                        ]\r\n                    }\r\n                }\r\n            ],\r\n            \"validFor\": {},\r\n            \"@baseType\": \"Contact\",\r\n            \"@schemaLocation\": \"/api/shoppingCart/v4/schema/contact.json\",\r\n            \"@type\": \"Contact\"\r\n        }\r\n    ],\r\n    \"relatedParty\": [\r\n        {\r\n            \"id\": \"f59e1d6d-6045-4d97-b077-27bb17e545a7\",\r\n            \"href\": \"/api/customerManagement/v4/customer/f59e1d6d-6045-4d97-b077-27bb17e545a7\",\r\n            \"name\": \"SDJ DSR LLG\",\r\n            \"role\": \"Customer\",\r\n            \"@referredType\": \"Customer\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dsales}}/api/shoppingCart/v4/shoppingCart",
+							"host": [
+								"{{dsales}}"
+							],
+							"path": [
+								"api",
+								"shoppingCart",
+								"v4",
+								"shoppingCart"
+							],
+							"query": [
+								{
+									"key": "shoppingCartCharacteristic.value",
+									"value": "Marketplace",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createOrder",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);  \r",
+									"pm.collectionVariables.set(\"productOrderId\", jsonData.id);\r",
+									"pm.collectionVariables.set(\"productOrderItemId\", jsonData.productOrderItem[0].id);\r",
+									"pm.collectionVariables.set(\"productOrderExternalId\", jsonData.externalId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"shoppingCartId\": \"{{shoppingCartId}}\"\r\n}"
+						},
+						"url": {
+							"raw": "{{marketplace-ui-backend}}/api/ui-backend/order/product-order",
+							"host": [
+								"{{marketplace-ui-backend}}"
+							],
+							"path": [
+								"api",
+								"ui-backend",
+								"order",
+								"product-order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PPRD - productOrder",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);  \r",
+									"pm.collectionVariables.set(\"productOrderId\", jsonData.id);\r",
+									"pm.collectionVariables.set(\"productOrderItemId\", jsonData.productOrderItem[0].id);\r",
+									"pm.collectionVariables.set(\"productOrderExternalId\", jsonData.externalId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"category\": \"marketplace\",\r\n    \"contact\": [\r\n        {\r\n            \"@baseType\": \"Contact\",\r\n            \"@schemaLocation\": \"/api/shoppingCart/v4/schema/contact.json\",\r\n            \"@type\": \"Contact\",\r\n            \"contactMedium\": [\r\n                {\r\n                    \"characteristic\": {\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\",\r\n                        \"contactType\": \"Document_identifier\",\r\n                        \"socialNetworkId\": \"19465711Y\"\r\n                    },\r\n                    \"mediumType\": \"Document\"\r\n                },\r\n                {\r\n                    \"characteristic\": {\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\",\r\n                        \"contactType\": \"Mobile_Number\",\r\n                        \"phoneNumber\": \"686846555\"\r\n                    },\r\n                    \"mediumType\": \"Mobile_Phone\"\r\n                },\r\n                {\r\n                    \"characteristic\": {\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\",\r\n                        \"contactType\": \"Personal_Email\",\r\n                        \"emailAddress\": \"268437170@xxxx.es\"\r\n                    },\r\n                    \"mediumType\": \"Email\"\r\n                },\r\n                {\r\n                    \"characteristic\": {\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\",\r\n                        \"contactType\": \"Address\",\r\n                        \"place\": [\r\n                            {\r\n                                \"id\": \"ae506d39-7890-4471-a95a-21c96a140d49\",\r\n                                \"@baseType\": \"RelatedPlaceRef\",\r\n                                \"@referredType\": \"RelatedPlaceRef\",\r\n                                \"@schemaLocation\": \"/api/shoppingCart/v4/schema/relatedplacereforvalue.json\",\r\n                                \"@type\": \"RelatedPlaceRef\",\r\n                                \"href\": \"/api/geographicAddressManagement/v4/geographicAddress/ae506d39-7890-4471-a95a-21c96a140d49\",\r\n                                \"role\": \"GeographicAddress\"\r\n                            }\r\n                        ]\r\n                    },\r\n                    \"mediumType\": \"Address\"\r\n                }\r\n            ],\r\n            \"contactName\": \"SDJ, LLG DSR\",\r\n            \"contactType\": \"DeliveryContact\",\r\n            \"validFor\": {}\r\n        },\r\n        {\r\n            \"@baseType\": \"Contact\",\r\n            \"@schemaLocation\": \"/api/shoppingCart/v4/schema/contact.json\",\r\n            \"@type\": \"Contact\",\r\n            \"contactMedium\": [\r\n                {\r\n                    \"characteristic\": {\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\",\r\n                        \"contactType\": \"Document_identifier\",\r\n                        \"socialNetworkId\": \"19465711Y\"\r\n                    },\r\n                    \"mediumType\": \"Document\"\r\n                },\r\n                {\r\n                    \"characteristic\": {\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\",\r\n                        \"contactType\": \"Mobile_Number\",\r\n                        \"phoneNumber\": \"686846555\"\r\n                    },\r\n                    \"mediumType\": \"Mobile_Phone\"\r\n                },\r\n                {\r\n                    \"characteristic\": {\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\",\r\n                        \"contactType\": \"Personal_Email\",\r\n                        \"emailAddress\": \"268437170@xxxx.es\"\r\n                    },\r\n                    \"mediumType\": \"Email\"\r\n                },\r\n                {\r\n                    \"characteristic\": {\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\",\r\n                        \"contactType\": \"Address\",\r\n                        \"place\": [\r\n                            {\r\n                                \"id\": \"f2aedd19-160a-4604-ac29-e0c588176085\",\r\n                                \"@baseType\": \"RelatedPlaceRef\",\r\n                                \"@referredType\": \"RelatedPlaceRef\",\r\n                                \"@schemaLocation\": \"/api/shoppingCart/v4/schema/relatedplacereforvalue.json\",\r\n                                \"@type\": \"RelatedPlaceRef\",\r\n                                \"href\": \"/api/geographicAddressManagement/v4/geographicAddress/f2aedd19-160a-4604-ac29-e0c588176085\",\r\n                                \"role\": \"GeographicAddress\"\r\n                            }\r\n                        ]\r\n                    },\r\n                    \"mediumType\": \"Address\"\r\n                }\r\n            ],\r\n            \"contactName\": \"SDJ, LLG DSR\",\r\n            \"contactType\": \"BillingContact\",\r\n            \"validFor\": {}\r\n        }\r\n    ],\r\n    \"externalId\": \"230113000011\",\r\n    \"orderCharacteristic\": [\r\n        {\r\n            \"id\": \"22569605-de3c-4c2f-8a94-833d70675f10\",\r\n            \"name\": \"shipping_zone\",\r\n            \"value\": \"SP1\",\r\n            \"valueType\": \"string\"\r\n        },\r\n        {\r\n            \"id\": \"799e3e5c-b608-4fe3-997e-0d85c8055cc4\",\r\n            \"name\": \"Marketplace_Platforms\",\r\n            \"value\": \"Marketplace\",\r\n            \"valueType\": \"string\"\r\n        },\r\n        {\r\n            \"id\": \"48f76335-c2b6-407c-9884-c6c04e95f821\",\r\n            \"name\": \"Ip_client\",\r\n            \"value\": \"212.166.209.18\",\r\n            \"valueType\": \"string\"\r\n        },\r\n        {\r\n            \"id\": \"7f0891df-5288-457f-b753-4a2d0631d033\",\r\n            \"name\": \"siteID\",\r\n            \"value\": \"129804774\",\r\n            \"valueType\": \"string\"\r\n        },\r\n        {\r\n            \"id\": \"015e9adf-ba77-457e-a805-5dbc60be7d96\",\r\n            \"name\": \"Friendly_Order_ID\",\r\n            \"value\": \"230113000011\",\r\n            \"valueType\": \"integer\"\r\n        },\r\n        {\r\n            \"id\": \"f0f0b94c-fce3-4e9c-bccb-976b8eccfcf5\",\r\n            \"name\": \"Payment_Token\",\r\n            \"value\": \"eyJ0b2tlbiI6bnVsbCwic2hvcHBpbmdDYXJ0SWQiOm51bGwsImZyaWVuZGx5T3JkZXJOdW1iZXIiOiIyMzAxMTMwMDAwMTEifQ==\",\r\n            \"valueType\": \"STRING\"\r\n        },\r\n        {\r\n            \"id\": \"acda700c-8c9f-4b91-9257-0670b0743218\",\r\n            \"name\": \"partnerPaymentTokenId\",\r\n            \"value\": \"63c15304347fc70eab9bd35e\",\r\n            \"valueType\": \"string\"\r\n        }\r\n    ],\r\n    \"productOrderItem\": [\r\n        {\r\n            \"id\": \"2056\",\r\n            \"itemPrice\": [\r\n                {\r\n                    \"name\": \"Offer_Price\",\r\n                    \"price\": {\r\n                        \"taxIncludedAmount\": {\r\n                            \"unit\": \"EUR\",\r\n                            \"value\": 164.0\r\n                        },\r\n                        \"taxRate\": 21.0\r\n                    },\r\n                    \"priceAlteration\": [],\r\n                    \"priceType\": \"Offer_Price\"\r\n                },\r\n                {\r\n                    \"name\": \"Line_Price\",\r\n                    \"price\": {\r\n                        \"taxIncludedAmount\": {\r\n                            \"unit\": \"EUR\",\r\n                            \"value\": 164.0\r\n                        },\r\n                        \"taxRate\": 21.0\r\n                    },\r\n                    \"priceAlteration\": [],\r\n                    \"priceType\": \"Line_Price\"\r\n                },\r\n                {\r\n                    \"name\": \"Line_Shipping_Price\",\r\n                    \"price\": {\r\n                        \"taxIncludedAmount\": {\r\n                            \"unit\": \"EUR\",\r\n                            \"value\": 0.0\r\n                        },\r\n                        \"taxRate\": 21.0\r\n                    },\r\n                    \"priceAlteration\": [],\r\n                    \"priceType\": \"Line_Shipping_Price\"\r\n                },\r\n                {\r\n                    \"name\": \"Line_Total_Price\",\r\n                    \"price\": {\r\n                        \"taxIncludedAmount\": {\r\n                            \"unit\": \"EUR\",\r\n                            \"value\": 164.0\r\n                        },\r\n                        \"taxRate\": 21.0\r\n                    },\r\n                    \"priceAlteration\": [],\r\n                    \"priceType\": \"Line_Total_Price\"\r\n                },\r\n                {\r\n                    \"name\": \"offeringPrice\",\r\n                    \"price\": {\r\n                        \"taxIncludedAmount\": {\r\n                            \"unit\": \"EUR\",\r\n                            \"value\": 164.0\r\n                        },\r\n                        \"taxRate\": 21.0\r\n                    },\r\n                    \"priceAlteration\": [],\r\n                    \"priceType\": \"offeringPrice\"\r\n                }\r\n            ],\r\n            \"action\": \"delete\",\r\n            \"orderItemCharacteristic\": [\r\n                {\r\n                    \"id\": \"1e02e7d5-70cd-4aa7-aed0-456815da69c7\",\r\n                    \"name\": \"Logistic_Order\",\r\n                    \"value\": \"1\"\r\n                }\r\n            ],\r\n            \"product\": {\r\n                \"productCharacteristic\": [\r\n                    {\r\n                        \"name\": \"Offer_Quantity\",\r\n                        \"value\": \"50\",\r\n                        \"valueType\": \"string\"\r\n                    },\r\n                    {\r\n                        \"name\": \"selected_shipping_type_code\",\r\n                        \"value\": \"24H\",\r\n                        \"valueType\": \"string\"\r\n                    },\r\n                    {\r\n                        \"name\": \"cut_off_time\",\r\n                        \"value\": \"null\",\r\n                        \"valueType\": \"string\"\r\n                    },\r\n                    {\r\n                        \"name\": \"minDeliveryDays\",\r\n                        \"value\": \"5\",\r\n                        \"valueType\": \"integer\"\r\n                    },\r\n                    {\r\n                        \"name\": \"maxDeliveryDays\",\r\n                        \"value\": \"5\",\r\n                        \"valueType\": \"integer\"\r\n                    },\r\n                    {\r\n                        \"name\": \"Seller_Name\",\r\n                        \"value\": \"Tienda Prueba\",\r\n                        \"valueType\": \"string\"\r\n                    },\r\n                    {\r\n                        \"name\": \"ean\",\r\n                        \"value\": \"9877332227\",\r\n                        \"valueType\": \"string\"\r\n                    },\r\n                    {\r\n                        \"name\": \"imagen\",\r\n                        \"value\": \"https://media-dev-eu-2.mirakl.net/SOURCE/5ebdd716cda94fccac65c889583d9742\",\r\n                        \"valueType\": \"string\"\r\n                    },\r\n                    {\r\n                        \"name\": \"Color\",\r\n                        \"value\": \"Azul\",\r\n                        \"valueType\": \"string\"\r\n                    },\r\n                    {\r\n                        \"name\": \"Capacidad de memoria (GB)\",\r\n                        \"value\": \"1024\",\r\n                        \"valueType\": \"string\"\r\n                    }\r\n                ],\r\n                \"productOffering\": {\r\n                    \"id\": \"e0b0b725-c4e6-47e3-90f7-26b82c3047cd\",\r\n                    \"href\": \"/api/productCatalogManagement/v4/productOffering/e0b0b725-c4e6-47e3-90f7-26b82c3047cd\"\r\n                },\r\n                \"productSpecification\": {\r\n                    \"href\": \"/api/productCatalogManagement/v4/productSpecification/94017554-2983-4141-875f-40ac02cdd7aa\",\r\n                    \"id\": \"94017554-2983-4141-875f-40ac02cdd7aa\",\r\n                    \"name\": \"iStorage diskAshur2 SSD 1Tb Azul\"\r\n                }\r\n            },\r\n            \"quantity\": 1,\r\n            \"state\": \"acknowledged\"\r\n        }\r\n    ],\r\n    \"relatedParty\": [\r\n        {\r\n            \"@referredType\": \"Customer\",\r\n            \"href\": \"/api/customerManagement/v4/customer/f59e1d6d-6045-4d97-b077-27bb17e545a7\",\r\n            \"id\": \"f59e1d6d-6045-4d97-b077-27bb17e545a7\",\r\n            \"name\": \"SDJ DSR LLG\",\r\n            \"role\": \"Customer\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dpom}}/api/productOrderingManagement/v4/productOrder",
+							"host": [
+								"{{dpom}}"
+							],
+							"path": [
+								"api",
+								"productOrderingManagement",
+								"v4",
+								"productOrder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DEV - productOrder",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);  \r",
+									"pm.collectionVariables.set(\"productOrderId\", jsonData.id);\r",
+									"pm.collectionVariables.set(\"productOrderItemId\", jsonData.productOrderItem[0].id);\r",
+									"pm.collectionVariables.set(\"productOrderExternalId\", jsonData.externalId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"category\": \"marketplace\",\r\n    \"externalId\": \"321112000009\",\r\n    \"orderCharacteristic\": [\r\n        {\r\n            \"id\": \"d8918eeb-46f1-4e17-a05e-282efc6396f1\",\r\n            \"name\": \"Marketplace_Platforms\",\r\n            \"valueType\": \"string\",\r\n            \"value\": \"Marketplace\"\r\n        },\r\n        {\r\n            \"id\": \"aaf1fc2c-8ff6-46da-8818-2787cdcd05dd\",\r\n            \"name\": \"Friendly_Order_ID\",\r\n            \"valueType\": \"integer\",\r\n            \"value\": \"221112000009\"\r\n        },\r\n        {\r\n            \"id\": \"fdd7d6c5-c78e-45da-a348-6722376b22d3\",\r\n            \"name\": \"siteID\",\r\n            \"valueType\": \"integer\",\r\n            \"value\": \"345345346\"\r\n        },\r\n        {\r\n            \"id\": \"fc1c1c0d-cd7f-436e-939d-c2c0e6180320\",\r\n            \"name\": \"PSP_Transaction_ID\",\r\n            \"valueType\": \"string\",\r\n            \"value\": \"45345345A5E\"\r\n        }\r\n    ],\r\n    \"productOrderItem\": [\r\n        {\r\n            \"orderItemCharacteristic\": [\r\n                {\r\n                    \"id\": \"a61736b6-f9bf-4fa7-ace1-ecbbfe11a3cb\",\r\n                    \"name\": \"Logistic_Order\",\r\n                    \"value\": \"1\"\r\n                }\r\n            ],\r\n            \"id\": \"2054\",\r\n            \"quantity\": 2,\r\n            \"action\": \"delete\",\r\n            \"itemPrice\": [\r\n                {\r\n                    \"name\": \"Offer_Price\",\r\n                    \"priceType\": \"Offer_Price\",\r\n                    \"price\": {\r\n                        \"taxRate\": 21.0,\r\n                        \"taxIncludedAmount\": {\r\n                            \"unit\": \"EUR\",\r\n                            \"value\": 160.0\r\n                        }\r\n                    },\r\n                    \"priceAlteration\": []\r\n                },\r\n                {\r\n                    \"name\": \"Line_Price\",\r\n                    \"priceType\": \"Line_Price\",\r\n                    \"price\": {\r\n                        \"taxRate\": 21.0,\r\n                        \"taxIncludedAmount\": {\r\n                            \"unit\": \"EUR\",\r\n                            \"value\": 320.0\r\n                        }\r\n                    },\r\n                    \"priceAlteration\": []\r\n                },\r\n                {\r\n                    \"name\": \"Line_Shipping_Price\",\r\n                    \"priceType\": \"Line_Shipping_Price\",\r\n                    \"price\": {\r\n                        \"taxRate\": 21.0,\r\n                        \"taxIncludedAmount\": {\r\n                            \"unit\": \"EUR\",\r\n                            \"value\": 12.0\r\n                        }\r\n                    },\r\n                    \"priceAlteration\": []\r\n                },\r\n                {\r\n                    \"name\": \"Line_Total_Price\",\r\n                    \"priceType\": \"Line_Total_Price\",\r\n                    \"price\": {\r\n                        \"taxRate\": 21.0,\r\n                        \"taxIncludedAmount\": {\r\n                            \"unit\": \"EUR\",\r\n                            \"value\": 332.0\r\n                        }\r\n                    },\r\n                    \"priceAlteration\": []\r\n                },\r\n                {\r\n                    \"name\": \"offeringPrice\",\r\n                    \"priceType\": \"offeringPrice\",\r\n                    \"price\": {\r\n                        \"taxRate\": 21.0,\r\n                        \"taxIncludedAmount\": {\r\n                            \"unit\": \"EUR\",\r\n                            \"value\": 160.0\r\n                        }\r\n                    },\r\n                    \"priceAlteration\": []\r\n                }\r\n            ],\r\n            \"product\": {\r\n                \"productCharacteristic\": [\r\n                    {\r\n                        \"name\": \"Offer_Quantity\",\r\n                        \"valueType\": \"string\",\r\n                        \"value\": \"2\"\r\n                    },\r\n                    {\r\n                        \"name\": \"selected_shipping_type_code\",\r\n                        \"valueType\": \"string\",\r\n                        \"value\": \"EXP\"\r\n                    },\r\n                    {\r\n                        \"name\": \"cut_off_time\",\r\n                        \"valueType\": \"string\",\r\n                        \"value\": \"null\"\r\n                    },\r\n                    {\r\n                        \"name\": \"minDeliveryDays\",\r\n                        \"valueType\": \"integer\",\r\n                        \"value\": \"7\"\r\n                    },\r\n                    {\r\n                        \"name\": \"maxDeliveryDays\",\r\n                        \"valueType\": \"integer\",\r\n                        \"value\": \"7\"\r\n                    },\r\n                    {\r\n                        \"name\": \"Seller_Name\",\r\n                        \"valueType\": \"string\",\r\n                        \"value\": \"Tienda Prueba\"\r\n                    },\r\n                    {\r\n                        \"name\": \"imagen\",\r\n                        \"valueType\": \"string\",\r\n                        \"value\": \"https://media-dev-eu-2.mirakl.net/SOURCE/2166228ce03f49eb8fbdd669c879440e\"\r\n                    },\r\n                    {\r\n                        \"name\": \"Color\",\r\n                        \"valueType\": \"string\",\r\n                        \"value\": \"Azul\"\r\n                    },\r\n                    {\r\n                        \"name\": \"Capacidad de memoria (GB)\",\r\n                        \"valueType\": \"string\",\r\n                        \"value\": \"512\"\r\n                    }\r\n                ],\r\n                \"productOffering\": {\r\n                    \"id\": \"67976df6-e7a7-4e88-b8ae-6da2d9750df3\",\r\n                    \"href\": \"/api/productCatalogManagement/v4/productOffering/67976df6-e7a7-4e88-b8ae-6da2d9750df3\"\r\n                },\r\n                \"productSpecification\": {\r\n                    \"id\": \"a9f4e838-1b44-4165-b08c-b16fe4736b9a\",\r\n                    \"href\": \"/api/productCatalogManagement/v4/productSpecification/a9f4e838-1b44-4165-b08c-b16fe4736b9a\"\r\n                }\r\n            },\r\n            \"state\": \"acknowledged\"\r\n        }\r\n    ],\r\n    \"relatedParty\": [\r\n        {\r\n            \"@referredType\": \"Customer\",\r\n            \"href\": \"/api/customerManagement/v4/customer/3a14a720-7c29-460a-8497-c29380f3cd79\",\r\n            \"id\": \"3a14a720-7c29-460a-8497-c29380f3cd79\",\r\n            \"name\": \"givenName primaryFamilyName secondaryFamilyName\",\r\n            \"role\": \"Customer\"\r\n        }\r\n    ],\r\n    \"contact\": [\r\n        {\r\n            \"@baseType\": \"Contact\",\r\n            \"@schemaLocation\": \"/api/shoppingCart/v4/schema/contact.json\",\r\n            \"@type\": \"Contact\",\r\n            \"contactName\": \"VLD, NNB LVV\",\r\n            \"contactType\": \"DeliveryContact\",\r\n            \"contactMedium\": [\r\n                {\r\n                    \"mediumType\": \"Document\",\r\n                    \"characteristic\": {\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\",\r\n                        \"contactType\": \"Document_identifier\",\r\n                        \"socialNetworkId\": \"78706262D\"\r\n                    }\r\n                },\r\n                {\r\n                    \"mediumType\": \"Mobile_Phone\",\r\n                    \"characteristic\": {\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\",\r\n                        \"contactType\": \"Mobile_Number\",\r\n                        \"phoneNumber\": \"261261222\"\r\n                    }\r\n                },\r\n                {\r\n                    \"mediumType\": \"Email\",\r\n                    \"characteristic\": {\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\",\r\n                        \"contactType\": \"Personal_Email\",\r\n                        \"emailAddress\": \"274596841@xxxx.es\"\r\n                    }\r\n                },\r\n                {\r\n                    \"mediumType\": \"Address\",\r\n                    \"characteristic\": {\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\",\r\n                        \"contactType\": \"Address\",\r\n                        \"place\": [\r\n                            {\r\n                                \"@baseType\": \"RelatedPlaceRef\",\r\n                                \"@type\": \"RelatedPlaceRef\",\r\n                                \"id\": \"d117f85c-64e9-44b2-a39c-21fab0227152\",\r\n                                \"href\": \"/api/geographicAddressManagement/v4/geographicAddress/d117f85c-64e9-44b2-a39c-21fab0227152\",\r\n                                \"role\": \"GeographicAddress\",\r\n                                \"@referredType\": \"RelatedPlaceRef\"\r\n                            }\r\n                        ]\r\n                    }\r\n                }\r\n            ],\r\n            \"validFor\": {}\r\n        },\r\n        {\r\n            \"@baseType\": \"Contact\",\r\n            \"@schemaLocation\": \"/api/shoppingCart/v4/schema/contact.json\",\r\n            \"@type\": \"Contact\",\r\n            \"contactName\": \"VLD, NNB LVV\",\r\n            \"contactType\": \"BillingContact\",\r\n            \"contactMedium\": [\r\n                {\r\n                    \"mediumType\": \"Document\",\r\n                    \"characteristic\": {\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\",\r\n                        \"contactType\": \"Document_identifier\",\r\n                        \"socialNetworkId\": \"78706262D\"\r\n                    }\r\n                },\r\n                {\r\n                    \"mediumType\": \"Mobile_Phone\",\r\n                    \"characteristic\": {\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\",\r\n                        \"contactType\": \"Mobile_Number\",\r\n                        \"phoneNumber\": \"261261222\"\r\n                    }\r\n                },\r\n                {\r\n                    \"mediumType\": \"Email\",\r\n                    \"characteristic\": {\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\",\r\n                        \"contactType\": \"Personal_Email\",\r\n                        \"emailAddress\": \"274596841@xxxx.es\"\r\n                    }\r\n                },\r\n                {\r\n                    \"mediumType\": \"Address\",\r\n                    \"characteristic\": {\r\n                        \"@baseType\": \"MediumCharacteristic\",\r\n                        \"@schemaLocation\": \"/api/shoppingCart/v4/schema/mediumcharacteristic.json\",\r\n                        \"@type\": \"MediumCharacteristic\",\r\n                        \"contactType\": \"Address\",\r\n                        \"place\": [\r\n                            {\r\n                                \"@baseType\": \"RelatedPlaceRef\",\r\n                                \"@type\": \"RelatedPlaceRef\",\r\n                                \"id\": \"1d950010-839e-4bc2-984b-903c8aaeab8d\",\r\n                                \"href\": \"/api/geographicAddressManagement/v4/geographicAddress/1d950010-839e-4bc2-984b-903c8aaeab8d\",\r\n                                \"role\": \"GeographicAddress\",\r\n                                \"@referredType\": \"RelatedPlaceRef\"\r\n                            }\r\n                        ]\r\n                    }\r\n                }\r\n            ],\r\n            \"validFor\": {}\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dpom}}/api/productOrderingManagement/v4/productOrder",
+							"host": [
+								"{{dpom}}"
+							],
+							"path": [
+								"api",
+								"productOrderingManagement",
+								"v4",
+								"productOrder"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Stories",
+			"item": [
+				{
+					"name": "MKTPLACE-1032-RequestRefund",
+					"item": [
+						{
+							"name": "startProcess refund_flow",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"productOrderID\": \"{{productOrderId}}\",\n    \"productOrderItemID\": \"{{productOrderItemId}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{marketplace-si-bpmn}}/api/si-bpmn/camunda/start/refund_flow",
+									"host": [
+										"{{marketplace-si-bpmn}}"
+									],
+									"path": [
+										"api",
+										"si-bpmn",
+										"camunda",
+										"start",
+										"refund_flow"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "shoppingCartId",
+			"value": ""
+		},
+		{
+			"key": "customerId",
+			"value": ""
+		},
+		{
+			"key": "productOrderId",
+			"value": ""
+		},
+		{
+			"key": "productOrderItemId",
+			"value": ""
+		},
+		{
+			"key": "productOrderExternalId",
+			"value": ""
+		}
+	]
+}
